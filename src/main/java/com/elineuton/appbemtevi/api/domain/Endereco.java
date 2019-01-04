@@ -1,4 +1,4 @@
-package com.elineuton.appbemtevi.api.model;
+package com.elineuton.appbemtevi.api.domain;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;

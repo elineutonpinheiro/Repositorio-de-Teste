@@ -1,5 +1,7 @@
-package com.elineuton.appbemtevi.api.model;
+package com.elineuton.appbemtevi.api.domain;
 
+
+import java.io.Serializable;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -9,8 +11,9 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Unidade {
-	
+public class Unidade implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

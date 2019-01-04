@@ -1,4 +1,4 @@
-package com.elineuton.appbemtevi.api.resource;
+package com.elineuton.appbemtevi.api.resources;
 
 import java.net.URI;
 import java.util.List;
@@ -20,34 +20,34 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.elineuton.appbemtevi.api.model.Unidade;
-import com.elineuton.appbemtevi.api.repository.Unidades;
-import com.elineuton.appbemtevi.api.service.UnidadeService;
+import com.elineuton.appbemtevi.api.domain.Unidade;
+//import com.elineuton.appbemtevi.api.repositories.UnidadeRepository;
+import com.elineuton.appbemtevi.api.services.UnidadeService;
 
 @RestController
 @RequestMapping("/unidades")
-public class UnidadesResource {
+public class UnidadeResource {
 
-	@Autowired
-	private Unidades unidades;
+//	@Autowired
+//	private UnidadeRepository unidadeRepository;
 	
 	@Autowired
 	private UnidadeService unidadeService;
 	
 	@GetMapping
 	public List<Unidade> listar(){
-		return unidades.findAll();
+		return unidadeService.listar();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Unidade> consultaPorId(@PathVariable Long id) {
-		Unidade unidade = unidades.findById(id).orElse(null);
+		Unidade unidade = unidadeService.consultarPorId(id);
 		return unidade != null ? ResponseEntity.ok(unidade) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Unidade> criar(@RequestBody @Valid Unidade unidade, HttpServletResponse response) {
-		Unidade unidadeSalva = unidades.save(unidade);
+		Unidade unidadeSalva = unidadeService.criar(unidade);
 		
 		//Mapear o recurso -> unidade+id
 		
@@ -67,7 +67,7 @@ public class UnidadesResource {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long id) {
-		unidades.deleteById(id);
+		unidadeService.remover(id);
 	}
 	
 	
