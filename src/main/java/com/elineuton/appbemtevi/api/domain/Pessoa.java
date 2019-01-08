@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +18,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-//import com.elineuton.appbemtevi.api.domain.enums.TipoPessoa;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_pessoa", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -49,8 +46,6 @@ public abstract class Pessoa implements Serializable {
 	private String rg;
 	
 	private String escolaridade;
-
-	//private Integer tipo;
 	
 	@Embedded
 	private Endereco endereco;
@@ -143,14 +138,6 @@ public abstract class Pessoa implements Serializable {
 	public void setEscolaridade(String escolaridade) {
 		this.escolaridade = escolaridade;
 	}
-
-//	public TipoPessoa getTipo() {
-//		return TipoPessoa.toEnum(tipo);
-//	}
-//
-//	public void setTipo(TipoPessoa tipo) {
-//		this.tipo = tipo.getCod();
-//	}
 	
 	public Endereco getEndereco() {
 		return endereco;
