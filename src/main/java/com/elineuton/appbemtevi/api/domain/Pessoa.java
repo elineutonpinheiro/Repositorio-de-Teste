@@ -1,21 +1,30 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-@MappedSuperclass
+//import com.elineuton.appbemtevi.api.domain.enums.TipoPessoa;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_pessoa", discriminatorType = DiscriminatorType.STRING)
 public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,12 +49,14 @@ public abstract class Pessoa implements Serializable {
 	private String rg;
 	
 	private String escolaridade;
+
+	//private Integer tipo;
 	
 	@Embedded
 	private Endereco endereco;
 	
-//	@OneToMany(mappedBy = "pessoa")
-//	private List<ContatoPessoal> contatos = new ArrayList<>();
+	@OneToMany
+	private List<Contato> contatos;
 	
 	@ManyToMany
 	@JoinTable(name = "pessoa_unidade", 
@@ -133,6 +144,14 @@ public abstract class Pessoa implements Serializable {
 		this.escolaridade = escolaridade;
 	}
 
+//	public TipoPessoa getTipo() {
+//		return TipoPessoa.toEnum(tipo);
+//	}
+//
+//	public void setTipo(TipoPessoa tipo) {
+//		this.tipo = tipo.getCod();
+//	}
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -140,14 +159,14 @@ public abstract class Pessoa implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-/*	public List<ContatoPessoal> getContatos() {
+	
+	public List<Contato> getContatos() {
 		return contatos;
 	}
 
-	public void setContatos(List<ContatoPessoal> contatos) {
+	public void setContatos(List<Contato> contatos) {
 		this.contatos = contatos;
-	}*/
+	}
 
 	public List<Unidade> getUnidades() {
 		return unidades;

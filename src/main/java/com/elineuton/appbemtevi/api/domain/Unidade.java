@@ -2,7 +2,6 @@ package com.elineuton.appbemtevi.api.domain;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Embedded;
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -34,11 +32,8 @@ public class Unidade implements Serializable{
 	@Embedded
 	private Endereco endereco;
 	
-	@OneToMany(mappedBy = "unidade")
-	private List<ContatoInstitucional> contatos = new ArrayList<>();
-	
-//	@ManyToMany(mappedBy = "unidades")
-//	private List<Pessoa> pessoas;
+	@OneToMany
+	private List<Contato> contatos;
 
 	public Long getId() {
 		return id;
@@ -80,11 +75,11 @@ public class Unidade implements Serializable{
 		this.endereco = endereco;
 	}
 
-	public List<ContatoInstitucional> getContatos() {
+	public List<Contato> getContatos() {
 		return contatos;
 	}
 
-	public void setContatos(List<ContatoInstitucional> contatos) {
+	public void setContatos(List<Contato> contatos) {
 		this.contatos = contatos;
 	}
 
@@ -113,17 +108,5 @@ public class Unidade implements Serializable{
 		return true;
 	}
 	
-//	@OneToMany
-//	@JoinColumn(name = "unidade_id") //esta coluna está na tabela "contato".
-//	private List<Contato> contatos;
-//	
-//	@ManyToMany (mappedBy = "unidades")
-//	private List<Pessoa> pessoas;
-	
-//	@OneToOne(mappedBy = "unidade")
-//	private Endereco endereco;
-	
-//	@OneToOne //(mappedBy = "unidade", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
-//	private Endereco endereco;
 	
 }
