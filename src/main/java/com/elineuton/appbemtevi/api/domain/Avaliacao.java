@@ -1,6 +1,7 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Avaliacao implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,9 +21,8 @@ public class Avaliacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String data;
-	
-	private String horario;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date dataHorario;
 	
 	@OneToMany
 	private List<Questao> questoes;
@@ -39,20 +41,12 @@ public class Avaliacao implements Serializable {
 		this.id = id;
 	}
 
-	public String getData() {
-		return data;
+	public Date getDataHorario() {
+		return dataHorario;
 	}
 
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public String getHorario() {
-		return horario;
-	}
-
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setDataHorario(Date dataHorario) {
+		this.dataHorario = dataHorario;
 	}
 
 	public List<Questao> getQuestoes() {

@@ -27,9 +27,6 @@ import com.elineuton.appbemtevi.api.services.UnidadeService;
 @RestController
 @RequestMapping("/unidades")
 public class UnidadeResource {
-
-//	@Autowired
-//	private UnidadeRepository unidadeRepository;
 	
 	@Autowired
 	private UnidadeService unidadeService;

@@ -4,6 +4,7 @@ package com.elineuton.appbemtevi.api.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Unidade implements Serializable{
 	@Embedded
 	private Endereco endereco;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Contato> contatos;
 
 	public Long getId() {

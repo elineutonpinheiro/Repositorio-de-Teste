@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -33,6 +36,7 @@ public abstract class Pessoa implements Serializable {
 	
 	private Character sexo;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNasc;
 	
 	private String nacionalidade;
@@ -50,7 +54,7 @@ public abstract class Pessoa implements Serializable {
 	@Embedded
 	private Endereco endereco;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Contato> contatos;
 	
 	@ManyToMany
