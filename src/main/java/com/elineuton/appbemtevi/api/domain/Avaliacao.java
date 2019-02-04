@@ -1,7 +1,7 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,8 +21,8 @@ public class Avaliacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataHorario;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime dataHorario = LocalDateTime.now();
 	
 	@OneToMany
 	private List<Questao> questoes;
@@ -41,11 +41,11 @@ public class Avaliacao implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataHorario() {
+	public LocalDateTime getDataHorario() {
 		return dataHorario;
 	}
 
-	public void setDataHorario(Date dataHorario) {
+	public void setDataHorario(LocalDateTime dataHorario) {
 		this.dataHorario = dataHorario;
 	}
 

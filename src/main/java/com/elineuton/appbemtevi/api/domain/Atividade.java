@@ -1,12 +1,15 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Atividade implements Serializable {
@@ -19,6 +22,9 @@ public class Atividade implements Serializable {
 	private String titulo;
 	
 	private String descricao;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime dataHora = LocalDateTime.now();
 	
 	@ManyToOne
 	private Turma turma;
@@ -53,6 +59,14 @@ public class Atividade implements Serializable {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+
+	public LocalDateTime getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
 
 	@Override

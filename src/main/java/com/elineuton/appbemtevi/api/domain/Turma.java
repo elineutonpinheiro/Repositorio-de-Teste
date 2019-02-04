@@ -21,7 +21,7 @@ public class Turma implements Serializable {
 	
 	private String descricao;
 	
-	private boolean status;
+	private String situacao;
 
 	public Long getId() {
 		return id;
@@ -55,14 +55,13 @@ public class Turma implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public String getSituacao() {
+		return situacao;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
-	
 
 	@Override
 	public int hashCode() {

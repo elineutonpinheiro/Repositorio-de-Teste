@@ -1,7 +1,7 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,7 +37,7 @@ public abstract class Pessoa implements Serializable {
 	private Character sexo;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date dataNasc;
+	private LocalDate data_nascimento;
 	
 	private String nacionalidade;
 	
@@ -87,12 +87,12 @@ public abstract class Pessoa implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public Date getDataNasc() {
-		return dataNasc;
+	public LocalDate getData_nascimento() {
+		return data_nascimento;
 	}
 
-	public void setDataNasc(Date dataNasc) {
-		this.dataNasc = dataNasc;
+	public void setData_nascimento(LocalDate data_nascimento) {
+		this.data_nascimento = data_nascimento;
 	}
 
 	public String getNacionalidade() {
