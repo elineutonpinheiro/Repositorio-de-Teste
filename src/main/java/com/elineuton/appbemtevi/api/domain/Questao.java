@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Questao implements Serializable {
@@ -15,11 +16,12 @@ public class Questao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String categoria;
+	@ManyToOne
+	private Categoria categoria;
 	
 	private String enunciado;
 	
-	private String resposta;
+	private String conteudo;
 	
 	private boolean status;
 
@@ -31,11 +33,11 @@ public class Questao implements Serializable {
 		this.id = id;
 	}
 
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
@@ -47,12 +49,12 @@ public class Questao implements Serializable {
 		this.enunciado = enunciado;
 	}
 
-	public String getResposta() {
-		return resposta;
+	public String getConteudo() {
+		return conteudo;
 	}
 
-	public void setResposta(String resposta) {
-		this.resposta = resposta;
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
 	}
 
 	public boolean isStatus() {

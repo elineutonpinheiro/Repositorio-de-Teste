@@ -1,7 +1,7 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+/*import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,14 +20,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+*/
 
-
-@Entity
+/*@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)*/
 public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -190,7 +190,7 @@ public abstract class Pessoa implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}*/
 	
 
 }
