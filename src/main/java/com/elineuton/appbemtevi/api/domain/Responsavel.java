@@ -34,9 +34,9 @@ public class Responsavel implements Serializable{
 	
 	private String cor;
 	
-	private String nacionalidade;
+	//private String nacionalidade;
 	
-	private String naturalidade;
+	//private String naturalidade;
 	
 	private String cpf;
 	
@@ -46,8 +46,6 @@ public class Responsavel implements Serializable{
 	
 	private String ocupacao;
 	
-	private String perfil; //TODO Relacionar nas permissões -> Valor = Responsavel;
-	
 	private String localDeTrabalho;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -56,6 +54,8 @@ public class Responsavel implements Serializable{
 	@OneToMany
 	private List<Unidade> unidades;
 
+	private String perfil; //TODO Relacionar nas permissões -> Valor = Responsavel;
+	
 	public Long getId() {
 		return id;
 	}
@@ -102,22 +102,6 @@ public class Responsavel implements Serializable{
 
 	public void setCor(String cor) {
 		this.cor = cor;
-	}
-
-	public String getNacionalidade() {
-		return nacionalidade;
-	}
-
-	public void setNacionalidade(String nacionalidade) {
-		this.nacionalidade = nacionalidade;
-	}
-
-	public String getNaturalidade() {
-		return naturalidade;
-	}
-
-	public void setNaturalidade(String naturalidade) {
-		this.naturalidade = naturalidade;
 	}
 
 	public String getCpf() {

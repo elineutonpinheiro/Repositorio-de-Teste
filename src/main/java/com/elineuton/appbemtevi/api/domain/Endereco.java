@@ -18,13 +18,13 @@ public class Endereco {
 	private String bairro;
 	
 	@NotNull
-	private String cep;
-	
-	@NotNull
 	private String cidade;
 	
 	@NotNull
 	private String estado;
+	
+	@NotNull
+	private String cep;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -58,14 +58,6 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
 	public String getCidade() {
 		return cidade;
 	}
@@ -80,6 +72,14 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 	
 }

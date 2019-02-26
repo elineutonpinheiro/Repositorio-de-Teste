@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.elineuton.appbemtevi.api.domain.enums.GrupoSanguineo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -57,6 +58,10 @@ public class Aluno implements Serializable{
 	private Turma turma;
 	
 	private boolean presenca;
+	
+	private String need;
+	
+	private String grupoSanguineo;
 
 	public Long getId() {
 		return id;
@@ -176,6 +181,22 @@ public class Aluno implements Serializable{
 
 	public void setPresenca(boolean presenca) {
 		this.presenca = presenca;
+	}
+	
+	public String getNeed() {
+		return need;
+	}
+
+	public void setNeed(String need) {
+		this.need = need;
+	}
+	
+	public GrupoSanguineo getGrupoSanguineo() {
+		return GrupoSanguineo.toEnum(grupoSanguineo);
+	}
+
+	public void setGrupoSanguineo(GrupoSanguineo grupoSanguineo) {
+		this.grupoSanguineo = grupoSanguineo.getDescricao();
 	}
 
 	@Override

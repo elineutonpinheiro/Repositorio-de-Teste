@@ -22,7 +22,7 @@ public class Avaliacao implements Serializable {
 	private Long id;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private LocalDateTime dataHorario = LocalDateTime.now();
+	private LocalDateTime dataHora = LocalDateTime.now();
 	
 	@OneToMany
 	private List<Questao> questoes;
@@ -41,12 +41,12 @@ public class Avaliacao implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDateTime getDataHorario() {
-		return dataHorario;
+	public LocalDateTime getDataHora() {
+		return dataHora;
 	}
 
-	public void setDataHorario(LocalDateTime dataHorario) {
-		this.dataHorario = dataHorario;
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
 
 	public List<Questao> getQuestoes() {
