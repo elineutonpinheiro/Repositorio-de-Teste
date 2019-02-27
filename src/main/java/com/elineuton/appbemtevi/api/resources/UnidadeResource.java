@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -64,6 +66,16 @@ public class UnidadeResource {
 	public ResponseEntity<Void> remover(@PathVariable Long id) {
 		unidadeService.remover(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/page") //TODO Implementar o UnidadeDTO posteriormente
+	public ResponseEntity<Page<Unidade>> listarUnidadesPage(
+			@RequestParam(value="page", defaultValue="0") Integer pagina, 
+			@RequestParam(value="size", defaultValue="24") Integer tamanho, 
+			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direcao) {
+		Page<Unidade> listaUnidades = unidadeService.buscarPagina(pagina, tamanho, orderBy, direcao);
+		return ResponseEntity.ok(listaUnidades);	
 	}
 	
 	
