@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,8 +29,9 @@ public class TurmaResource {
 	private TurmaService turmaService;
 	
 	@GetMapping
-	public List<Turma> listar(){
-		return turmaService.listar();
+	public ResponseEntity<List<Turma>> listar(){
+		List<Turma> turmas = turmaService.listar();
+		return ResponseEntity.ok(turmas);
 	}
 	
 	@GetMapping("/{id}")
@@ -61,9 +60,9 @@ public class TurmaResource {
 	}
 	
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long id) {
+	public ResponseEntity<Void> remover(@PathVariable Long id) {
 		turmaService.remover(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 	

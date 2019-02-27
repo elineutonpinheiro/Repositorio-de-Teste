@@ -46,7 +46,7 @@ public class AppbemteviExceptionHandler extends ResponseEntityExceptionHandler{
 	} 
 	
 	
-	//Método para tratar a exceção de tentar excluir um recurso inexistente.
+	//Método para tratar a exceção de tentar excluir, atualizar um recurso inexistente.
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request){
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
