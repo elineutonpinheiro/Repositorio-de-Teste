@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.elineuton.appbemtevi.api.domain.Unidade;
+import com.elineuton.appbemtevi.api.dto.UnidadeDTO;
 //import com.elineuton.appbemtevi.api.repositories.UnidadeRepository;
 import com.elineuton.appbemtevi.api.services.UnidadeService;
 
@@ -29,23 +30,23 @@ import com.elineuton.appbemtevi.api.services.UnidadeService;
 public class UnidadeResource {
 	
 	@Autowired
-	private UnidadeService unidadeService;
+	private UnidadeService service;
 	
 	@GetMapping
 	public ResponseEntity<List<Unidade>> listarUnidades(){
-		List<Unidade> listaUnidades = unidadeService.listar();
+		List<Unidade> listaUnidades = service.listar();
 		return ResponseEntity.ok(listaUnidades);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Unidade> consultaPorId(@PathVariable Long id) {
-		Unidade unidade = unidadeService.consultarPorId(id);
+		Unidade unidade = service.consultarPorId(id);
 		return unidade != null ? ResponseEntity.ok(unidade) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Unidade> criar(@RequestBody @Valid Unidade unidade, HttpServletResponse response) {
-		Unidade unidadeSalva = unidadeService.criar(unidade);
+		Unidade unidadeSalva = service.criar(unidade);
 		
 		//Mapear o recurso -> unidade+id
 		
@@ -58,24 +59,25 @@ public class UnidadeResource {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Unidade> atualizar(@PathVariable Long id, @RequestBody @Valid Unidade unidade) {
-		Unidade unidadeSalva = unidadeService.atualizar(id, unidade);
+		Unidade unidadeSalva = service.atualizar(id, unidade);
 		return ResponseEntity.ok(unidadeSalva);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Long id) {
-		unidadeService.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/page") //TODO Implementar o UnidadeDTO posteriormente
-	public ResponseEntity<Page<Unidade>> listarUnidadesPage(
+	public ResponseEntity<Page<UnidadeDTO>> listarUnidadesPage(
 			@RequestParam(value="page", defaultValue="0") Integer pagina, 
 			@RequestParam(value="size", defaultValue="24") Integer tamanho, 
 			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direcao) {
-		Page<Unidade> listaUnidades = unidadeService.buscarPagina(pagina, tamanho, orderBy, direcao);
-		return ResponseEntity.ok(listaUnidades);	
+		Page<Unidade> listaUnidades = service.buscarPagina(pagina, tamanho, orderBy, direcao);
+		Page<UnidadeDTO> listDto = listaUnidades.map(unidade -> new UnidadeDTO(unidade));
+		return ResponseEntity.ok(listDto);	
 	}
 	
 	

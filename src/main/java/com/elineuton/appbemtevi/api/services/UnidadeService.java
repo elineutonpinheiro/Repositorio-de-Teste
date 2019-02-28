@@ -17,40 +17,40 @@ import com.elineuton.appbemtevi.api.repositories.UnidadeRepository;
 public class UnidadeService {
 
 	@Autowired
-	private UnidadeRepository unidadeRepository;
+	private UnidadeRepository repositorio;
 	
 	
 	public List<Unidade> listar(){
-		return unidadeRepository.findAll();
+		return repositorio.findAll();
 	}
 	
 	public Unidade consultarPorId(Long id) {
-		Unidade unidade = unidadeRepository.findById(id).orElse(null);
+		Unidade unidade = repositorio.findById(id).orElse(null);
 		return unidade;
 	}
 	
 	public Unidade criar(Unidade unidade) {
-		Unidade unidadeSalva = unidadeRepository.save(unidade);
+		Unidade unidadeSalva = repositorio.save(unidade);
 		return unidadeSalva;
 	}
 	
 	public Unidade atualizar(Long id, Unidade unidade) {
-		Unidade unidadeSalva = unidadeRepository.findById(id).get();
+		Unidade unidadeSalva = repositorio.findById(id).get();
 		
 		if(unidadeSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
 		BeanUtils.copyProperties(unidade, unidadeSalva, "id");
-		return unidadeRepository.save(unidadeSalva);
+		return repositorio.save(unidadeSalva);
 	}
 	 
 	public void remover(Long id) {
-		unidadeRepository.deleteById(id);
+		repositorio.deleteById(id);
 	}
 	
 	public Page<Unidade> buscarPagina(Integer pagina, Integer tamanho, String orderBy, String direcao){
 		PageRequest pageable = PageRequest.of(pagina, tamanho, Direction.valueOf(direcao), orderBy);
-		return unidadeRepository.findAll(pageable);
+		return repositorio.findAll(pageable);
 	}
 }
