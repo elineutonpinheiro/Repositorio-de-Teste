@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.elineuton.appbemtevi.api.domain.Unidade;
+import com.elineuton.appbemtevi.api.dto.UnidadeDTO;
 import com.elineuton.appbemtevi.api.repositories.UnidadeRepository;
 
 @Service
@@ -25,32 +26,36 @@ public class UnidadeService {
 	}
 	
 	public Unidade consultarPorId(Long id) {
-		Unidade unidade = repositorio.findById(id).orElse(null);
-		return unidade;
+		Unidade obj = repositorio.findById(id).orElse(null);
+		return obj;
 	}
 	
-	public Unidade criar(Unidade unidade) {
-		Unidade unidadeSalva = repositorio.save(unidade);
-		return unidadeSalva;
+	public Unidade criar(Unidade obj) {
+		Unidade objSalvo = repositorio.save(obj);
+		return objSalvo;
 	}
 	
-	public Unidade atualizar(Long id, Unidade unidade) {
-		Unidade unidadeSalva = repositorio.findById(id).get();
+	public Unidade atualizar(Unidade obj, Long id) {
+		Unidade objSalvo = repositorio.findById(id).get();
 		
-		if(unidadeSalva == null) {
+		if(objSalvo == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		BeanUtils.copyProperties(unidade, unidadeSalva, "id");
-		return repositorio.save(unidadeSalva);
+		BeanUtils.copyProperties(obj, objSalvo, "id");
+		return repositorio.save(objSalvo);
 	}
 	 
 	public void remover(Long id) {
 		repositorio.deleteById(id);
 	}
 	
-	public Page<Unidade> buscarPagina(Integer pagina, Integer tamanho, String orderBy, String direcao){
-		PageRequest pageable = PageRequest.of(pagina, tamanho, Direction.valueOf(direcao), orderBy);
+	public Page<Unidade> buscarPagina(Integer pagina, Integer tamanho, String ordem, String direcao){
+		PageRequest pageable = PageRequest.of(pagina, tamanho, Direction.valueOf(direcao), ordem);
 		return repositorio.findAll(pageable);
+	}
+	
+	public Unidade fromDTO(UnidadeDTO objDto) {
+		return null; //TODO Implementar o método de conversão de uma UnidadeDTO em Unidade
 	}
 }

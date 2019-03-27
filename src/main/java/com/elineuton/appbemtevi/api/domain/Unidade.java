@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Unidade implements Serializable{
@@ -21,13 +21,13 @@ public class Unidade implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotEmpty(message="O campo Nome é de preenchimento obrigatório")
 	private String nome;
 	
-	@NotNull
+	@NotEmpty
 	private String tipo;
 	
-	@NotNull
+	@NotEmpty
 	private String situacao;
 	
 	@Embedded

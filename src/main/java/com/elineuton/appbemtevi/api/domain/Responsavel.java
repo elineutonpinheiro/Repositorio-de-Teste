@@ -38,13 +38,13 @@ public class Responsavel implements Serializable{
 	
 	//private String naturalidade;
 	
-	private String cpf;
+	//private String cpf;
 	
-	private String estadoCivil;
+	//private String estadoCivil;
 	
-	private String escolaridade;
+	//private String escolaridade;
 	
-	private String ocupacao;
+	//private String ocupacao;
 	
 	private String localDeTrabalho;
 	
@@ -102,38 +102,6 @@ public class Responsavel implements Serializable{
 
 	public void setCor(String cor) {
 		this.cor = cor;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
-
-	public String getEscolaridade() {
-		return escolaridade;
-	}
-
-	public void setEscolaridade(String escolaridade) {
-		this.escolaridade = escolaridade;
-	}
-
-	public String getOcupacao() {
-		return ocupacao;
-	}
-
-	public void setOcupacao(String ocupacao) {
-		this.ocupacao = ocupacao;
 	}
 
 	public String getPerfil() {

@@ -19,8 +19,6 @@ public class Profissional implements Serializable{
 	private Long id;
 	
 	private String nome;
-
-	private String formacao;
 	
 	private String perfil; //TODO Relacionar nas permissões -> Valor = Cuidador, Professor;
 	
@@ -47,14 +45,6 @@ public class Profissional implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getFormacao() {
-		return formacao;
-	}
-
-	public void setFormacao(String formacao) {
-		this.formacao = formacao;
 	}
 
 	public String getPerfil() {

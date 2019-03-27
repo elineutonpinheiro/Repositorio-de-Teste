@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Questao implements Serializable {
@@ -16,14 +15,18 @@ public class Questao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	private Categoria categoria;
+	private String codigo;
 	
-	private String enunciado;
+	private String resposta;
 	
-	private String conteudo;
+	//@ManyToOne
+	//private Categoria categoria;
 	
-	private boolean status;
+	//private String enunciado;
+	
+	//private String conteudo;
+	
+	//private boolean status;
 
 	public Long getId() {
 		return id;
@@ -32,39 +35,22 @@ public class Questao implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public String getEnunciado() {
-		return enunciado;
-	}
-
-	public void setEnunciado(String enunciado) {
-		this.enunciado = enunciado;
-	}
-
-	public String getConteudo() {
-		return conteudo;
-	}
-
-	public void setConteudo(String conteudo) {
-		this.conteudo = conteudo;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
 	
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getResposta() {
+		return resposta;
+	}
+
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
+	}
 
 	@Override
 	public int hashCode() {

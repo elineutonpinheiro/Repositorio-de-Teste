@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.elineuton.appbemtevi.api.domain.Aluno;
+import com.elineuton.appbemtevi.api.dto.AlunoDTO;
 import com.elineuton.appbemtevi.api.services.AlunoService;
 
 @RestController
@@ -26,43 +29,54 @@ import com.elineuton.appbemtevi.api.services.AlunoService;
 public class AlunoResource {
 	
 	@Autowired
-	private AlunoService alunoService;
+	private AlunoService service;
 	
 	@GetMapping
 	public ResponseEntity<List<Aluno>> listar(){
-		List<Aluno> alunos = alunoService.listar();
-		return ResponseEntity.ok(alunos);
+		List<Aluno> lista = service.listar();
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Aluno> consultaPorId(@PathVariable Long id) {
-		Aluno aluno = alunoService.consultarPorId(id);
-		return aluno != null ? ResponseEntity.ok(aluno) : ResponseEntity.notFound().build();
+		Aluno obj = service.consultarPorId(id);
+		return obj != null ? ResponseEntity.ok(obj) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Aluno> criar(@RequestBody @Valid Aluno aluno, HttpServletResponse response) {
-		Aluno alunoSalvo = alunoService.criar(aluno);
+	public ResponseEntity<Aluno> criar(@Valid @RequestBody Aluno obj, HttpServletResponse response) {
+		Aluno objSalvo = service.criar(obj);
 		
 		//Mapear o recurso -> aluno+id
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(alunoSalvo.getId()).toUri();
+				.buildAndExpand(objSalvo.getId()).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 		
-		return ResponseEntity.created(uri).body(alunoSalvo);
+		return ResponseEntity.created(uri).body(objSalvo);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Aluno> atualizar(@PathVariable Long id, @RequestBody @Valid Aluno aluno) {
-		Aluno alunoSalvo = alunoService.atualizar(id, aluno);
-		return ResponseEntity.ok(alunoSalvo);
+	public ResponseEntity<Aluno> atualizar(@Valid @RequestBody Aluno obj, @PathVariable Long id) {
+		Aluno objSalvo = service.atualizar(obj, id);
+		return ResponseEntity.ok(objSalvo);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Long id) {
-		alunoService.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/page") //TODO Implementar o AlunoDTO posteriormente
+	public ResponseEntity<Page<AlunoDTO>> listarAlunosPage(
+			@RequestParam(value="page", defaultValue="0") Integer pagina, 
+			@RequestParam(value="size", defaultValue="24") Integer tamanho, 
+			@RequestParam(value="orderBy", defaultValue="nome") String ordem, 
+			@RequestParam(value="direction", defaultValue="ASC") String direcao) {
+		Page<Aluno> lista = service.buscarPagina(pagina, tamanho, ordem, direcao);
+		Page<AlunoDTO> listDto = lista.map(obj -> new AlunoDTO(obj));
+		return ResponseEntity.ok(listDto);	
 	}
 	
 	

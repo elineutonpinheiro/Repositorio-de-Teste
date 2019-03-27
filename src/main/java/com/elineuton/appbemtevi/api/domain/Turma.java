@@ -19,7 +19,7 @@ public class Turma implements Serializable{
 	
 	private String sala;
 	
-	private String situacao;
+	private boolean ativa;
 
 	public Long getId() {
 		return id;
@@ -45,12 +45,12 @@ public class Turma implements Serializable{
 		this.sala = sala;
 	}
 
-	public String getSituacao() {
-		return situacao;
+	public boolean isAtiva() {
+		return ativa;
 	}
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
 	}
 
 	@Override

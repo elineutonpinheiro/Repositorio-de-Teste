@@ -1,4 +1,4 @@
-package com.elineuton.appbemtevi.api.domain;
+/*package com.elineuton.appbemtevi.api.domain;
 
 import java.io.Serializable;
 
@@ -70,3 +70,4 @@ public class Categoria implements Serializable {
 	
 
 }
+*/

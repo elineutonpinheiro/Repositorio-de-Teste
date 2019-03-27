@@ -24,8 +24,18 @@ public class Atividade implements Serializable {
 	private String descricao;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private LocalDateTime dataHora = LocalDateTime.now();
+	private LocalDateTime dataHora; // = LocalDateTime.now();
 	
+	public Atividade() {
+		
+	}
+	
+	public Atividade(Long id, String titulo, String descricao) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+	}
+
 	@ManyToOne
 	private Turma turma;
 

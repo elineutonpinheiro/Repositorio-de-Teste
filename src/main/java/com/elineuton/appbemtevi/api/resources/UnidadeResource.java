@@ -33,34 +33,34 @@ public class UnidadeResource {
 	private UnidadeService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Unidade>> listarUnidades(){
-		List<Unidade> listaUnidades = service.listar();
-		return ResponseEntity.ok(listaUnidades);
+	public ResponseEntity<List<Unidade>> listar(){
+		List<Unidade> lista = service.listar();
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Unidade> consultaPorId(@PathVariable Long id) {
-		Unidade unidade = service.consultarPorId(id);
-		return unidade != null ? ResponseEntity.ok(unidade) : ResponseEntity.notFound().build();
+		Unidade obj = service.consultarPorId(id);
+		return obj != null ? ResponseEntity.ok(obj) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Unidade> criar(@RequestBody @Valid Unidade unidade, HttpServletResponse response) {
-		Unidade unidadeSalva = service.criar(unidade);
+	public ResponseEntity<Unidade> criar(@Valid @RequestBody Unidade obj, HttpServletResponse response) {
+		Unidade objSalvo = service.criar(obj);
 		
 		//Mapear o recurso -> unidade+id
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(unidadeSalva.getId()).toUri();
+				.buildAndExpand(objSalvo.getId()).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 		
-		return ResponseEntity.created(uri).body(unidadeSalva);
+		return ResponseEntity.created(uri).body(objSalvo);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Unidade> atualizar(@PathVariable Long id, @RequestBody @Valid Unidade unidade) {
-		Unidade unidadeSalva = service.atualizar(id, unidade);
-		return ResponseEntity.ok(unidadeSalva);
+	public ResponseEntity<Unidade> atualizar(@Valid @RequestBody Unidade obj, @PathVariable Long id) {
+		Unidade objSalvo = service.atualizar(obj, id);
+		return ResponseEntity.ok(objSalvo);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -73,12 +73,11 @@ public class UnidadeResource {
 	public ResponseEntity<Page<UnidadeDTO>> listarUnidadesPage(
 			@RequestParam(value="page", defaultValue="0") Integer pagina, 
 			@RequestParam(value="size", defaultValue="24") Integer tamanho, 
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="orderBy", defaultValue="nome") String ordem, 
 			@RequestParam(value="direction", defaultValue="ASC") String direcao) {
-		Page<Unidade> listaUnidades = service.buscarPagina(pagina, tamanho, orderBy, direcao);
-		Page<UnidadeDTO> listDto = listaUnidades.map(unidade -> new UnidadeDTO(unidade));
+		Page<Unidade> lista = service.buscarPagina(pagina, tamanho, ordem, direcao);
+		Page<UnidadeDTO> listDto = lista.map(obj -> new UnidadeDTO(obj));
 		return ResponseEntity.ok(listDto);	
 	}
-	
 	
 }

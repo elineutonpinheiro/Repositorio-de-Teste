@@ -1,29 +1,29 @@
 package com.elineuton.appbemtevi.api.domain;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Embeddable
 public class Endereco {
 	
-	@NotNull
+	@NotEmpty
 	private String logradouro;
 	
-	@NotNull
+	@NotEmpty
 	private String numero;
 	
 	private String complemento;
 	
-	@NotNull
+	@NotEmpty
 	private String bairro;
 	
-	@NotNull
+	@NotEmpty
 	private String cidade;
 	
-	@NotNull
+	@NotEmpty
 	private String estado;
 	
-	@NotNull
+	@NotEmpty
 	private String cep;
 
 	public String getLogradouro() {

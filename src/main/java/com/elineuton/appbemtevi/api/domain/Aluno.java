@@ -32,23 +32,23 @@ public class Aluno implements Serializable{
 	
 	private Character sexo;
 	
-	private String cor;
+	//private String cor;
 	
-	private String nacionalidade;
+	//private String nacionalidade;
 	
-	private String naturalidade;
+	//private String naturalidade;
 	
-	private String cpf;
+	//private String cpf;
 	
-	private String cert_nascimento;
+	//private String cert_nascimento;
 	
 	@Embedded
 	private Endereco endereco;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL) //TODO CRIAR COM MÉTODO POST DO ALUNO
 	private List<Responsavel> responsaveis;
 
-	@OneToMany
+	@OneToMany //TODO CRIAR COM MÉTODO POST DO ALUNO
 	private List<PessoalAutorizado> pesssoalAutorizado;
 	
 	@OneToOne
@@ -93,46 +93,6 @@ public class Aluno implements Serializable{
 
 	public void setSexo(Character sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
-
-	public String getNacionalidade() {
-		return nacionalidade;
-	}
-
-	public void setNacionalidade(String nacionalidade) {
-		this.nacionalidade = nacionalidade;
-	}
-
-	public String getNaturalidade() {
-		return naturalidade;
-	}
-
-	public void setNaturalidade(String naturalidade) {
-		this.naturalidade = naturalidade;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCert_nascimento() {
-		return cert_nascimento;
-	}
-
-	public void setCert_nascimento(String cert_nascimento) {
-		this.cert_nascimento = cert_nascimento;
 	}
 
 	public Endereco getEndereco() {

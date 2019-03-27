@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.elineuton.appbemtevi.api.domain.Aluno;
@@ -14,35 +17,40 @@ import com.elineuton.appbemtevi.api.repositories.AlunoRepository;
 public class AlunoService {
 
 	@Autowired
-	private AlunoRepository alunoRepository;
+	private AlunoRepository repositorio;
 	
 	
 	public List<Aluno> listar(){
-		return alunoRepository.findAll();
+		return repositorio.findAll();
 	}
 	
 	public Aluno consultarPorId(Long id) {
-		Aluno aluno = alunoRepository.findById(id).orElse(null);
+		Aluno aluno = repositorio.findById(id).orElse(null);
 		return aluno;
 	}
 	
 	public Aluno criar(Aluno aluno) {
-		Aluno alunoSalvo = alunoRepository.save(aluno);
+		Aluno alunoSalvo = repositorio.save(aluno);
 		return alunoSalvo;
 	}
 	
-	public Aluno atualizar(Long id, Aluno aluno) {
-		Aluno alunoSalvo = alunoRepository.findById(id).get();
+	public Aluno atualizar(Aluno obj, Long id) {
+		Aluno objSalvo = repositorio.findById(id).get();
 		
-		if(alunoSalvo == null) {
+		if(objSalvo == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		BeanUtils.copyProperties(aluno, alunoSalvo, "id");
-		return alunoRepository.save(alunoSalvo);
+		BeanUtils.copyProperties(obj, objSalvo, "id");
+		return repositorio.save(objSalvo);
 	}
 	 
 	public void remover(Long id) {
-		alunoRepository.deleteById(id);
+		repositorio.deleteById(id);
+	}
+	
+	public Page<Aluno> buscarPagina(Integer pagina, Integer tamanho, String ordem, String direcao){
+		PageRequest pageable = PageRequest.of(pagina, tamanho, Direction.valueOf(direcao), ordem);
+		return repositorio.findAll(pageable);
 	}
 }
